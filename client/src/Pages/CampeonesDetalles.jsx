@@ -55,14 +55,13 @@ function ChampionDetail() {
             </div>
         </div>
 
-        {/* CONTENIDO */}
-        <div className="detail-content">
-          <section className="lore">
-            <h2>Lore</h2>
-            <p>{champion.lore}</p>
-        </section>
+        {/* LORE Y HABILIDADES */}
+        <div className="lore-section">
+          <h2>Lore</h2>
+          <p>{champion.lore}</p>
+        </div>
 
-        <section className="abilities">
+        <div className="abilities-section">
           <h2>Habilidades</h2>
           <div className="abilities-grid">
             {champion.spells.map(spell => (
@@ -72,12 +71,9 @@ function ChampionDetail() {
               </div>
           ))}
         </div>
-      </section>
+      </div>
     </div>
-
-  </div>
- )
-
+  )
 }
 
 export default ChampionDetail

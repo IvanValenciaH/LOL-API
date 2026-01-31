@@ -133,16 +133,16 @@ function Champions() {
             </div>
 
             <div className="card-actions">
-              <button className={`favorite-btn ${favorites.some(fav => fav.id === champ.id) ? "active" : ""}`}
-              onClick={() => toggleFavorite(champ)}
-              >
-                ★
-              </button>
-              
               <button className="details-btn" 
                 onClick={() => navigate(`/champion/${champ.id}`)}
               >
                 Ver detalles
+              </button>
+
+              <button className={`favorite-btn ${favorites.some(fav => fav.id === champ.id) ? "active" : ""}`}
+              onClick={() => toggleFavorite(champ)}
+              >
+                ★
               </button>
             </div>
           </div>

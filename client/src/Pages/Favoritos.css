@@ -1,6 +1,6 @@
-.champions-container {
+.favorites-container {
   width: 100%;
-  padding: 40px 60px; /* MISMO padding que el navbar */
+  padding: 40px 60px;
 }
 
 h1 {
@@ -9,32 +9,6 @@ h1 {
   margin-bottom: 30px;
   max-width: 100%;
   margin-bottom: 36px;
-}
-
-/* FILTROS */
-.filters {
-  display: flex;
-  gap: 14px;
-  margin-bottom: 32px;
-  flex-wrap: wrap;
-}
-
-.filters input,
-.filters select {
-  background: #020617;
-  border: 1px solid #1e293b;
-  color: #f8fafc;
-  padding: 20px 14px;
-  border-radius: 10px;
-}
-
-.filters input {
-  flex: 1;
-  min-width: 350px;
-}
-
-.filters select {
-  min-width: 180px;
 }
 
 /* GRID */
@@ -117,7 +91,6 @@ h1 {
   color: #f5c518;
 }
 
-
 .tags {
   display: flex;
   justify-content: center;
@@ -133,10 +106,9 @@ h1 {
   font-size: 0.7rem;
 }
 
-/* responsive styles */
-
+/* RESPONSIVE */
 @media (max-width: 1024px) {
-  .champions-container {
+  .favorites-container {
     padding: 30px 32px;
   }
 
@@ -146,15 +118,11 @@ h1 {
 }
 
 @media (max-width: 600px) {
-  .champions-container {
+  .favorites-container {
     padding: 20px 16px;
   }
 
   .grid {
     grid-template-columns: 1fr;
-  }
-
-  .card img {
-    height: 300px;
   }
 }

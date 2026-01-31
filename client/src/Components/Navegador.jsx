@@ -1,9 +1,16 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { supabase } from "../Supabase/Client"
 import "./Navegador.css"
 
 function Navbar() {
-  const handleLogout = () => {
-    console.log('Cerrar sesión')
+  const navigate = useNavigate()
+
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut()
+
+    if (!error) {
+      navigate("/login")
+    }
   }
 
   return (
@@ -16,7 +23,10 @@ function Navbar() {
           <Link to="/profile">Perfil</Link>
         </div>
       </div>
-      <button className="logout-btn" onClick={handleLogout}>Cerrar sesión</button>
+
+      <button className="logout-btn" onClick={handleLogout}>
+        Cerrar sesión
+      </button>
     </nav>
   )
 }
