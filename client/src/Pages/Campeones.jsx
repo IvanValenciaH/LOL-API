@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { supabase } from "../Supabase/Client"
 import "./Campeones.css"
 
 function Champions() {
@@ -12,22 +13,72 @@ function Champions() {
   const [lane, setLane] = useState("all")
   const [type, setType] = useState("all")
 
-  const [favorites, setFavorites] = useState(() => {
-    return JSON.parse(localStorage.getItem("favorites")) || []
-  })
+  const [favorites, setFavorites] = useState([])
+  const [user, setUser] = useState(null)
 
-  const toggleFavorite = (champion) => {
-  let updatedFavorites
+  // Cargar usuario autenticado y favoritos
+  useEffect(() => {
+    const loadUserAndFavorites = async () => {
+      try {
+        const { data: { user } } = await supabase.auth.getUser()
+        if (!user) return
 
-  if (favorites.some(fav => fav.id === champion.id)) {
-    updatedFavorites = favorites.filter(fav => fav.id !== champion.id)
-  } else {
-    updatedFavorites = [...favorites, champion]
+        setUser(user)
+
+        // Cargar favoritos desde Supabase
+        const { data, error } = await supabase
+          .from("favorites")
+          .select("champion_name")
+          .eq("user_id", user.id)
+
+        if (error) {
+          console.error("Error cargando favoritos:", error)
+          return
+        }
+
+        const favNames = data?.map(fav => fav.champion_name) || []
+        setFavorites(favNames)
+      } catch (err) {
+        console.error("Error:", err)
+      }
+    }
+
+    loadUserAndFavorites()
+  }, [])
+
+  const toggleFavorite = async (champion) => {
+    if (!user) {
+      alert("Debes iniciar sesión para agregar favoritos")
+      return
+    }
+
+    const isFavorited = favorites.includes(champion.name)
+
+    try {
+      if (isFavorited) {
+        // Eliminar de favoritos
+        const { error } = await supabase
+          .from("favorites")
+          .delete()
+          .eq("user_id", user.id)
+          .eq("champion_name", champion.name)
+
+        if (error) throw error
+        setFavorites(favorites.filter(name => name !== champion.name))
+      } else {
+        // Agregar a favoritos
+        const { error } = await supabase
+          .from("favorites")
+          .insert({ user_id: user.id, champion_name: champion.name })
+
+        if (error) throw error
+        setFavorites([...favorites, champion.name])
+      }
+    } catch (err) {
+      console.error("Error toggleando favorito:", err)
+      alert("Error al actualizar favoritos")
+    }
   }
-
-  setFavorites(updatedFavorites)
-  localStorage.setItem("favorites", JSON.stringify(updatedFavorites))
-}
 
 
 
@@ -139,7 +190,7 @@ function Champions() {
                 Ver detalles
               </button>
 
-              <button className={`favorite-btn ${favorites.some(fav => fav.id === champ.id) ? "active" : ""}`}
+              <button className={`favorite-btn ${favorites.includes(champ.name) ? "active" : ""}`}
               onClick={() => toggleFavorite(champ)}
               >
                 ★

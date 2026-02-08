@@ -1,19 +1,76 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { supabase } from "../Supabase/Client"
 import "./Favoritos.css"
 
 function Favorites() {
   const navigate = useNavigate()
   const [favorites, setFavorites] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
-    setFavorites(JSON.parse(localStorage.getItem("favorites")) || [])
+    loadFavorites()
   }, [])
 
-  const removeFavorite = (championId) => {
-    const updated = favorites.filter(fav => fav.id !== championId)
-    setFavorites(updated)
-    localStorage.setItem("favorites", JSON.stringify(updated))
+  const loadFavorites = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser()
+      if (!user) return
+
+      setUser(user)
+
+      // Obtener campeones favoritos del usuario con los detalles
+      const { data, error } = await supabase
+        .from("favorites")
+        .select("champion_name")
+        .eq("user_id", user.id)
+
+      if (error) throw error
+
+      const championNames = data?.map(fav => fav.champion_name) || []
+      
+      // Obtener detalles de los campeones desde el API
+      const response = await fetch("http://localhost:3000/api/champions")
+      const allChampions = await response.json()
+      
+      const favoriteChampions = allChampions.filter(champ => 
+        championNames.includes(champ.name)
+      )
+      
+      setFavorites(favoriteChampions)
+    } catch (err) {
+      console.error("Error cargando favoritos:", err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const removeFavorite = async (championId) => {
+    if (!user) return
+
+    // Encontrar el nombre del campeón
+    const champion = favorites.find(fav => fav.id === championId)
+    if (!champion) return
+
+    try {
+      const { error } = await supabase
+        .from("favorites")
+        .delete()
+        .eq("user_id", user.id)
+        .eq("champion_name", champion.name)
+
+      if (error) throw error
+
+      setFavorites(favorites.filter(fav => fav.id !== championId))
+    } catch (err) {
+      console.error("Error removiendo favorito:", err)
+      alert("Error al eliminar de favoritos")
+    }
+  }
+
+  if (loading) {
+    return <h2 style={{ textAlign: "center", marginTop: "50px" }}>Cargando...</h2>
   }
 
   if (favorites.length === 0) {
