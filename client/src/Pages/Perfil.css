@@ -1,0 +1,341 @@
+/* CONTENEDOR GENERAL */
+.profile-container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #0f172a;
+  border-radius: 14px;
+  color: #e5e7eb;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* TÍTULOS */
+.profile-container h1,
+.profile-container h3 {
+  color: #38bdf8;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+  padding-left: 0;
+}
+
+.profile-container h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+}
+
+/* AVATAR */
+.avatar {
+  display: block;
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #38bdf8;
+  background: #020617;
+}
+
+/* BOTÓN EDITAR */
+.edit-button {
+  display: block;
+  margin: 0 auto 25px;
+  padding: 10px 20px;
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.edit-button:hover {
+  background: #059669;
+  transform: scale(1.05);
+}
+
+/* INFORMACIÓN DEL PERFIL */
+.profile-info {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.profile-info p {
+  font-size: 1rem;
+  margin: 10px 0;
+}
+
+.profile-info strong {
+  color: #38bdf8;
+}
+
+/* GRUPOS DE INPUT */
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 6px;
+  color: #38bdf8;
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px 12px;
+  background: #0f172a;
+  border: 2px solid #38bdf8;
+  border-radius: 6px;
+  color: #e5e7eb;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #0ea5e9;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+}
+
+/* SECCIONES */
+.profile-section {
+  margin-top: 25px;
+}
+
+/* SECCIÓN ROL */
+.profile-container > label {
+  display: block;
+  margin-top: 30px;
+  margin-bottom: 12px;
+  color: #38bdf8;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+
+/* LISTA DE CAMPEONES */
+.profile-container ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.profile-container li {
+  background: #020617;
+  border: 1px solid #1e293b;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile-container li:hover {
+  background: #38bdf8;
+  color: #020617;
+}
+
+.profile-container li button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0;
+}
+
+/* AGREGAR CAMPEÓN */
+.champion-input {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  margin-top: 12px;
+}
+
+.champion-input input {
+  flex: 1;
+  padding: 10px 12px;
+  background: #0f172a;
+  border: 2px solid #38bdf8;
+  border-radius: 6px;
+  color: #e5e7eb;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.champion-input input:focus {
+  outline: none;
+  border-color: #0ea5e9;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+}
+
+.champion-input button {
+  padding: 10px 20px;
+  background: #f59e0b;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.champion-input button:hover {
+  background: #d97706;
+  transform: scale(1.05);
+}
+
+/* BOTONES */
+.profile-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 20px;
+  background: #38bdf8;
+  color: #020617;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.profile-btn:hover {
+  background: #0ea5e9;
+}
+
+/* CONTENEDOR DE BOTONES DE GUARDADO Y CANCELADO */
+.button-container {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 25px auto 0;
+}
+
+/* BOTÓN GUARDAR */
+.save-button {
+  flex: 1;
+  padding: 15px 30px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.save-button:hover:not(:disabled) {
+  background: #2563eb;
+  transform: scale(1.05);
+}
+
+/* BOTÓN CANCELAR */
+.cancel-button {
+  flex: 1;
+  padding: 15px 30px;
+  background: #6b7280;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.cancel-button:hover {
+  background: #4b5563;
+  transform: scale(1.05);
+}
+
+/* BOTÓN ELIMINAR AVATAR */
+.delete-button {
+  display: block;
+  margin: 12px auto 0;
+  padding: 10px 18px;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.15s ease;
+}
+
+.delete-button:hover {
+  background: #dc2626;
+  transform: translateY(-2px);
+}
+
+.save-button:disabled {
+  background: #6b7280;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* SELECT */
+select {
+  width: 100%;
+  padding: 10px 12px;
+  background: #0f172a;
+  border: 2px solid #38bdf8;
+  border-radius: 6px;
+  color: #e5e7eb;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+select:focus {
+  outline: none;
+  border-color: #0ea5e9;
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+}
+
+/* INPUT FILE */
+input[type="file"] {
+  display: block;
+  margin: 15px auto;
+  padding: 8px;
+  color: #e5e7eb;
+  font-size: 0.9rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .profile-container {
+    margin: 20px;
+    padding: 20px;
+  }
+
+  .avatar {
+    width: 120px;
+    height: 120px;
+  }
+
+  .edit-button,
+  .save-button {
+    width: 100%;
+  }
+}

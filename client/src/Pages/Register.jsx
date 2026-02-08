@@ -54,7 +54,7 @@ function Register() {
     setLoading(true)
 
     // 👉 Registro en Supabase Auth
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password
     })
@@ -68,6 +68,19 @@ function Register() {
       setLoading(false)
       return
     }
+
+    //Crear Perfil
+    await supabase.from("profiles").insert([
+      {
+        id: data.user.id,
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+        role: "",
+        champions: [],
+        avatar_url: ""
+      }
+    ])
 
     alert(
         "✅ Registro exitoso\n\n📧 Revisa tu correo para verificar tu cuenta antes de iniciar sesión."

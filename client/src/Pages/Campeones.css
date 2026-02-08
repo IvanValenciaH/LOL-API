@@ -14,9 +14,9 @@ h1 {
 /* FILTROS */
 .filters {
   display: flex;
-  gap: 14px;
+  gap: 10px;
   margin-bottom: 32px;
-  flex-wrap: wrap;
+  align-items: center;
 }
 
 .filters input,
@@ -24,17 +24,19 @@ h1 {
   background: #020617;
   border: 1px solid #1e293b;
   color: #f8fafc;
-  padding: 20px 14px;
-  border-radius: 10px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
 }
 
 .filters input {
-  flex: 1;
-  min-width: 350px;
+  flex: 3;
+  min-width: 400px;
 }
 
 .filters select {
-  min-width: 180px;
+  flex: 0.5;
+  min-width: 80px;
 }
 
 /* GRID */
