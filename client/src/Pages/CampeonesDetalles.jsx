@@ -9,8 +9,9 @@ function ChampionDetail() {
   const [champion, setChampion] = useState(null)
   const [loading, setLoading] = useState(true)
 
+  const API = import.meta.env.VITE_API_URL
   useEffect(() => {
-    fetch(`http://localhost:3000/api/champions/${id}`)
+    fetch(`${API}/api/champions/${id}`)
       .then(res => res.json())
       .then(data => {
         setChampion(data)

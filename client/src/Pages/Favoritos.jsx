@@ -31,7 +31,8 @@ function Favorites() {
       const championNames = data?.map(fav => fav.champion_name) || []
       
       // Obtener detalles de los campeones desde el API
-      const response = await fetch("http://localhost:3000/api/champions")
+      const API = import.meta.env.VITE_API_URL
+      const response = await fetch(`${API}/api/champions`)
       const allChampions = await response.json()
       
       const favoriteChampions = allChampions.filter(champ => 
