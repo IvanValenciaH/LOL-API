@@ -2,9 +2,10 @@
   "name": "server",
   "version": "1.0.0",
   "type": "module",
-  "main": "src/index.js",
+  "main": "src/Services/index.js",
   "scripts": {
-    "dev": "node src/index.js"
+    "dev": "node src/Services/index.js",
+    "start": "node src/Services/index.js"
   },
   "keywords": [],
   "author": "",
