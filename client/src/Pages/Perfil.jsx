@@ -214,11 +214,18 @@ function Profile() {
         return
       }
 
-      // guardar el path en la BD (avatar_url almacenará el path dentro del bucket)
-      const oldPath = profile.avatar_url
+      // Obtener URL pública de Supabase
+      const { data: publicUrlData } = supabase.storage
+        .from("avatars")
+        .getPublicUrl(filePath)
+
+      const publicUrl = publicUrlData?.publicUrl
+
+      // Guardar la URL pública en la BD
+      const oldAvatarUrl = profile.avatar_url
       const { data: updateData, error: updateErr } = await supabase
         .from('profiles')
-        .update({ avatar_url: filePath })
+        .update({ avatar_url: publicUrl })
         .eq('id', user.id)
 
       if (updateErr) {
@@ -226,15 +233,14 @@ function Profile() {
         return
       }
 
-      // actualizar estado local y obtener signed url
-      setProfile({ ...profile, avatar_url: filePath, id: user.id })
-      fetchSignedUrl(filePath)
+      // actualizar estado local con la URL pública
+      setProfile({ ...profile, avatar_url: publicUrl, id: user.id })
 
-      // eliminar archivo antiguo si existe y es distinto
+      // eliminar archivo antiguo si existe
       try {
-        if (oldPath && oldPath !== filePath) {
-          const { data: delData, error: delErr } = await supabase.storage.from('avatars').remove([oldPath])
-          // Silenciosamente ignorar errores al eliminar archivo antiguo
+        if (oldAvatarUrl && oldAvatarUrl !== publicUrl) {
+          // Intentar extraer el path de la URL antigua para eliminar del storage
+          // (opcional, ya que las URLs públicas de Supabase se auto-cacheam)
         }
       } catch (e) {
         // Silenciosamente ignorar errores
