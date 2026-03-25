@@ -9,7 +9,6 @@ function Profile() {
   const [saving, setSaving] = useState(false)
   const [isEditing, setIsEditing] = useState(false)
   const [errorMsg, setErrorMsg] = useState(null)
-  const [avatarPublicUrl, setAvatarPublicUrl] = useState(null)
   const [nicknameError, setNicknameError] = useState(null)
 
 
@@ -263,7 +262,6 @@ function Profile() {
       if (updateErr) return
 
       setProfile({ ...profile, avatar_url: null })
-      setAvatarPublicUrl(null)
     } catch (err) {
       // Silenciosamente ignorar errores
     }
@@ -302,11 +300,15 @@ function Profile() {
       <h1>Mi Perfil</h1>
 
       {/* AVATAR */}
-      <img
-        src={avatarPublicUrl || "/default-avatar.png"}
-        className="avatar"
-        alt="Avatar"
-      />
+      {profile?.avatar_url ? (
+        <img
+          src={profile.avatar_url}
+          className="avatar"
+          alt="Avatar"
+        />
+      ) : (
+        <div className="avatar" />
+      )}
 
       {isEditing && (
         <input
