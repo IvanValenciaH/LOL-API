@@ -390,11 +390,11 @@ function BuscarAmigos() {
             {searchResults.map(user => (
               <div key={user.id} className="user-card">
                 <img 
-                  src={getPublicAvatarUrl(user.avatar_url) || "/default-avatar.png"} 
+                  src={getPublicAvatarUrl(user.avatar_url) || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%236b7280'/%3E%3C/svg%3E"} 
                   alt={user.nickname || "Usuario"}
                   className="user-avatar"
                   onError={(e) => {
-                    e.target.src = "/default-avatar.png"
+                    e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%236b7280'/%3E%3C/svg%3E"
                   }}
                 />
 
@@ -423,11 +423,11 @@ function BuscarAmigos() {
             {receivedRequests.map(user => (
               <div key={user.friendship_id} className="user-card request-card">
                 <img 
-                  src={getPublicAvatarUrl(user.avatar_url) || "/default-avatar.png"} 
+                  src={getPublicAvatarUrl(user.avatar_url) || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%236b7280'/%3E%3C/svg%3E"} 
                   alt={user.nickname || "Usuario"}
                   className="user-avatar"
                   onError={(e) => {
-                    e.target.src = "/default-avatar.png"
+                    e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%236b7280'/%3E%3C/svg%3E"
                   }}
                 />
 
@@ -463,11 +463,11 @@ function BuscarAmigos() {
             {pendingRequests.map(user => (
               <div key={user.id} className="user-card pending-card">
                 <img 
-                  src={getPublicAvatarUrl(user.avatar_url) || "/default-avatar.png"} 
+                  src={getPublicAvatarUrl(user.avatar_url) || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%236b7280'/%3E%3C/svg%3E"} 
                   alt={user.nickname || "Usuario"}
                   className="user-avatar"
                   onError={(e) => {
-                    e.target.src = "/default-avatar.png"
+                    e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%236b7280'/%3E%3C/svg%3E"
                   }}
                 />
 
@@ -496,11 +496,11 @@ function BuscarAmigos() {
             {friends.map(friend => (
               <div key={friend.id} className="user-card friend-card">
                 <img 
-                  src={getPublicAvatarUrl(friend.avatar_url) || "/default-avatar.png"} 
+                  src={getPublicAvatarUrl(friend.avatar_url) || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%236b7280'/%3E%3C/svg%3E"} 
                   alt={friend.nickname || "Amigo"}
                   className="user-avatar"
                   onError={(e) => {
-                    e.target.src = "/default-avatar.png"
+                    e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%236b7280'/%3E%3C/svg%3E"
                   }}
                 />
 

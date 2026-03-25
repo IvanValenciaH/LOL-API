@@ -137,11 +137,11 @@ function PerfilAmigo() {
         {/* Avatar */}
         <div className="avatar-container">
           <img
-            src={avatarUrl || "/default-avatar.png"}
+            src={avatarUrl || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%236b7280'/%3E%3C/svg%3E"}
             className="friend-avatar"
             alt={profile.nickname || "Amigo"}
             onError={(e) => {
-              e.target.src = "/default-avatar.png"
+              e.target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%236b7280'/%3E%3C/svg%3E"
             }}
           />
         </div>
