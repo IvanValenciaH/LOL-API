@@ -104,7 +104,6 @@ function Profile() {
       }
 
       setProfile(newProfile);
-      if (newProfile?.avatar_url) fetchSignedUrl(newProfile.avatar_url);
       setLoading(false);
     } catch (err) {
       setErrorMsg(err.message || String(err));
@@ -189,40 +188,7 @@ function Profile() {
     }
   }
 
-  async function fetchSignedUrl(path) {
-    if (!path) return setAvatarPublicUrl(null)
-    try {
-      let objectPath = path
-
-      // Si nos pasaron una URL completa, intentar extraer el path dentro del bucket
-      if (typeof path === 'string' && path.startsWith('http')) {
-        // buscar segmentos conocidos
-        const marker = '/object/public/avatars/'
-        const idx = path.indexOf(marker)
-        if (idx !== -1) {
-          objectPath = path.substring(idx + marker.length)
-        } else {
-          // fallback: buscar la última aparición de '/avatars/'
-          const idx2 = path.indexOf('/avatars/')
-          if (idx2 !== -1) objectPath = path.substring(idx2 + '/avatars/'.length)
-          else {
-            // si no podemos extraer, asumimos que la URL es pública y la usamos tal cual
-            setAvatarPublicUrl(path)
-            return
-          }
-        }
-      }
-
-      // Usar getPublicUrl para buckets públicos (más simple, sin RLS issues)
-      const { data } = supabase.storage
-        .from("avatars")
-        .getPublicUrl(objectPath)
-
-      setAvatarPublicUrl(data?.publicUrl || null)
-    } catch (err) {
-      setAvatarPublicUrl(null)
-    }
-  }
+  // Eliminada función fetchSignedUrl
 
   /* =========================
      SUBIR AVATAR
