@@ -49,12 +49,6 @@ function Profile() {
           profileData.champions = [];
         }
         setProfile(profileData);
-        // obtener signed url si existe avatar path
-        if (profileData.avatar_url) {
-          fetchSignedUrl(profileData.avatar_url);
-        } else {
-          setAvatarPublicUrl(null);
-        }
         setLoading(false);
         return;
       }
