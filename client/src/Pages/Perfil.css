@@ -1,3 +1,15 @@
+.role-static {
+  font-size: 1.1rem;
+  color: #f1f5f9;
+  background: #222;
+  border-radius: 8px;
+  padding: 8px 18px;
+  margin: 8px 0 16px 0;
+  display: inline-block;
+  min-width: 100px;
+  text-align: center;
+  border: 2px solid #38bdf8;
+}
 /* CONTENEDOR GENERAL */
 .profile-container {
   max-width: 900px;
@@ -29,13 +41,22 @@
 /* AVATAR */
 .avatar {
   display: block;
+
+.avatar {
   width: 140px;
   height: 140px;
-  margin: 0 auto 20px;
   border-radius: 50%;
   object-fit: cover;
+  margin-bottom: 10px;
   border: 4px solid #38bdf8;
   background: #020617;
+}
+
+.avatar-noimg {
+  background: #18181b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* BOTÓN EDITAR */

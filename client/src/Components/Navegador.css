@@ -49,18 +49,24 @@
 }
 
 /* Notification Badge */
-.notification-badge {
+
+.notification-dot {
+  position: absolute;
+  top: 8px;
+  right: 0px;
+  width: 13px;
+  height: 13px;
   background: #dc2626;
-  color: white;
-  font-size: 12px;
-  font-weight: bold;
-  padding: 2px 8px;
   border-radius: 50%;
-  margin-left: 5px;
-  min-width: 20px;
-  text-align: center;
-  display: inline-block;
+  border: 2px solid #fff;
+  box-shadow: 0 0 6px #dc2626cc;
+  z-index: 2;
   animation: pulse 2s infinite;
+}
+
+.buscar-amigos-link {
+  position: relative;
+  display: inline-block;
 }
 
 @keyframes pulse {

@@ -16,10 +16,15 @@ function Profile() {
     getProfile()
   }, [])
 
-  const getProfile = async () => {
-    try {
-      setErrorMsg(null)
-      const { data: { user } } = await supabase.auth.getUser()
+      {avatarPublicUrl ? (
+        <img
+          src={avatarPublicUrl}
+          className="avatar"
+          alt="Avatar"
+        />
+      ) : (
+        <div className="avatar avatar-noimg" />
+      )}
       if (!user) {
         setErrorMsg("Usuario no autenticado")
         setLoading(false)
@@ -431,38 +436,47 @@ function Profile() {
 
       {/* ROL */}
       <label>Rol principal</label>
-      <select
-        value={profile?.role || ""}
-        onChange={(e) =>
-          setProfile({ ...profile, role: e.target.value })
-        }
-      >
-        <option value="">Selecciona tu rol</option>
-        <option value="Top">Top</option>
-        <option value="Jungle">Jungle</option>
-        <option value="Mid">Mid</option>
-        <option value="ADC">ADC</option>
-        <option value="Support">Support</option>
-      </select>
+      {isEditing ? (
+        <select
+          value={profile?.role || ""}
+          onChange={(e) =>
+            setProfile({ ...profile, role: e.target.value })
+          }
+        >
+          <option value="">Selecciona tu rol</option>
+          <option value="Top">Top</option>
+          <option value="Jungle">Jungle</option>
+          <option value="Mid">Mid</option>
+          <option value="ADC">ADC</option>
+          <option value="Support">Support</option>
+        </select>
+      ) : (
+        <div className="role-static">{profile?.role || "No especificado"}</div>
+      )}
 
       {/* CAMPEONES */}
       <br/><br/><h3>Campeones principales (máx 3)</h3>
 
-      <div className="champion-input">
-        <input
-          type="text"
-          placeholder="Ej: Ahri"
-          value={newChampion}
-          onChange={(e) => setNewChampion(e.target.value)}
-        />
-        <button onClick={addChampion}>Agregar</button>
-      </div>
+
+      {isEditing && (
+        <div className="champion-input">
+          <input
+            type="text"
+            placeholder="Ej: Ahri"
+            value={newChampion}
+            onChange={(e) => setNewChampion(e.target.value)}
+          />
+          <button onClick={addChampion}>Agregar</button>
+        </div>
+      )}
 
       <ul>
         {profile?.champions?.map((champ) => (
           <li key={champ}>
             {champ}
-            <button onClick={() => removeChampion(champ)}>❌</button>
+            {isEditing && (
+              <button onClick={() => removeChampion(champ)}>❌</button>
+            )}
           </li>
         ))}
       </ul>

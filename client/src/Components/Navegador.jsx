@@ -60,10 +60,10 @@ function Navbar() {
         <div className="links">
           <Link to="/">Campeones</Link>
           <Link to="/favorites">Favoritos</Link>
-          <Link to="/buscar-amigos">
+          <Link to="/buscar-amigos" className="buscar-amigos-link">
             Buscar Amigos
             {pendingCount > 0 && (
-              <span className="notification-badge">{pendingCount}</span>
+              <span className="notification-dot" />
             )}
           </Link>
           <Link to="/profile">Perfil</Link>
