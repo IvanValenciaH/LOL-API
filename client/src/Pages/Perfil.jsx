@@ -12,54 +12,51 @@ function Profile() {
   const [avatarPublicUrl, setAvatarPublicUrl] = useState(null)
   const [nicknameError, setNicknameError] = useState(null)
 
-  useEffect(() => {
-    getProfile()
-  }, [])
 
-      {avatarPublicUrl ? (
-        <img
-          src={avatarPublicUrl}
-          className="avatar"
-          alt="Avatar"
-        />
-      ) : (
-        <div className="avatar avatar-noimg" />
-      )}
+  useEffect(() => {
+    getProfile();
+  }, []);
+
+
+  async function getProfile() {
+    try {
+      setErrorMsg(null);
+      const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
-        setErrorMsg("Usuario no autenticado")
-        setLoading(false)
-        return
+        setErrorMsg("Usuario no autenticado");
+        setLoading(false);
+        return;
       }
 
       const { data, error } = await supabase
         .from("profiles")
         .select("*")
         .eq("id", user.id)
-        .maybeSingle()
+        .maybeSingle();
 
       if (error) {
-        setErrorMsg(error.message || JSON.stringify(error))
-        setProfile(null)
-        setLoading(false)
-        return
+        setErrorMsg(error.message || JSON.stringify(error));
+        setProfile(null);
+        setLoading(false);
+        return;
       }
 
       if (data) {
         // Si por alguna razón vienen múltiples filas, toma la primera
-        const profileData = Array.isArray(data) ? data[0] : data
+        const profileData = Array.isArray(data) ? data[0] : data;
         // Asegurarse de que champions es un array
         if (!Array.isArray(profileData.champions)) {
-          profileData.champions = []
+          profileData.champions = [];
         }
-        setProfile(profileData)
+        setProfile(profileData);
         // obtener signed url si existe avatar path
         if (profileData.avatar_url) {
-          fetchSignedUrl(profileData.avatar_url)
+          fetchSignedUrl(profileData.avatar_url);
         } else {
-          setAvatarPublicUrl(null)
+          setAvatarPublicUrl(null);
         }
-        setLoading(false)
-        return
+        setLoading(false);
+        return;
       }
 
       // Si no existe perfil, crear uno por defecto
@@ -72,14 +69,14 @@ function Profile() {
         role: "",
         champions: [],
         avatar_url: null
-      }
+      };
 
       // Usar upsert para evitar conflictos si el registro ya existe
       const { data: newProfile, error: insertError } = await supabase
         .from("profiles")
         .upsert(insertPayload)
         .select("*")
-        .maybeSingle()
+        .maybeSingle();
 
       if (insertError) {
         // Si hay conflicto de clave primaria, intentamos volver a obtener el perfil
@@ -88,30 +85,30 @@ function Profile() {
             .from("profiles")
             .select("*")
             .eq("id", user.id)
-            .maybeSingle()
+            .maybeSingle();
 
           if (fetchErr) {
-            setErrorMsg(fetchErr.message || JSON.stringify(fetchErr))
-            setLoading(false)
-            return
+            setErrorMsg(fetchErr.message || JSON.stringify(fetchErr));
+            setLoading(false);
+            return;
           }
 
-          setProfile(existing)
-          setLoading(false)
-          return
+          setProfile(existing);
+          setLoading(false);
+          return;
         }
 
-        setErrorMsg(insertError.message || JSON.stringify(insertError))
-        setLoading(false)
-        return
+        setErrorMsg(insertError.message || JSON.stringify(insertError));
+        setLoading(false);
+        return;
       }
 
-      setProfile(newProfile)
-      if (newProfile?.avatar_url) fetchSignedUrl(newProfile.avatar_url)
-      setLoading(false)
+      setProfile(newProfile);
+      if (newProfile?.avatar_url) fetchSignedUrl(newProfile.avatar_url);
+      setLoading(false);
     } catch (err) {
-      setErrorMsg(err.message || String(err))
-      setLoading(false)
+      setErrorMsg(err.message || String(err));
+      setLoading(false);
     }
   }
 
